@@ -3,6 +3,7 @@ import zipfile
 import torchvision
 import torchvision.transforms as transforms
 import os
+import torch
 
 def downloadData(download_location='/content/',extract_location='/content/'):
     url = 'https://s3.amazonaws.com/pytorch-tutorial-assets/imagenet_1k.zip'
@@ -16,7 +17,7 @@ def downloadData(download_location='/content/',extract_location='/content/'):
     zip_ref.extractall(extract_location)
     zip_ref.close()
 
-def createDataLoaders(data_path='/content/imagenet_1k',train_batch=30,eval_batch=30):
+def createDataLoaders(data_path='/content/imagenet_1k/',train_batch=30,eval_batch=30):
     traindir = os.path.join(data_path, 'train')
     valdir = os.path.join(data_path, 'val')
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])
