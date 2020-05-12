@@ -2,6 +2,7 @@ import requests
 import zipfile
 import torchvision
 import torchvision.transforms as transforms
+import os
 
 def downloadData(download_location='/content/',extract_location='/content/'):
     url = 'https://s3.amazonaws.com/pytorch-tutorial-assets/imagenet_1k.zip'
