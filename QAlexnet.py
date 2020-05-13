@@ -57,6 +57,8 @@ class QuantAlexNet(AlexNet):
 def QAlexnet(destination_path="/content/data/"):
     url="https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth"
     r = requests.get(url)
+    if(not os.path.exists(destination_path)):
+        os.mkdir(destination_path)
     model_file=destination_path+'alexnet-owt-4df8aa71.pth'
 
     with open(model_file, 'wb') as f:
