@@ -1,6 +1,6 @@
 import torch.nn as nn
 from QAlexnet import QAlexnet
-from per_channel import per_channel_quantization
+#from per_channel import per_channel_quantization
 from per_tensor import per_tensor_quantization
 from utils import evaluate
 from imagenet_data import createDataLoaders,downloadData
