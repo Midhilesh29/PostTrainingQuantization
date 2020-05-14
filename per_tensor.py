@@ -15,10 +15,8 @@ def per_tensor_quantization(model,data_loader,num_calibration_batches = 10,crite
     evaluate(model, criterion, data_loader, neval_batches=num_calibration_batches)
 
     torch.quantization.convert(model, inplace=True)
-    print('Post Training Quantization: Convert done')
-
-    print("Model size after per-tensor quantization:")
-    print_size_of_model(model)
+    print("\n")
+    print('Post Training Quantization: Convert done\n')
 
     return model
 
