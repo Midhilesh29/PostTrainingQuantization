@@ -149,6 +149,15 @@ class QuantMobileNetV2(nn.Module):
         x = self.dequant(x)
         return x
 
+    def fuse_model(self):
+        for m in self.modules():
+            if type(m) == ConvBNReLU:
+                torch.quantization.fuse_modules(m, ['0', '1', '2'], inplace=True)
+            if type(m) == InvertedResidual:
+                for idx in range(len(m.conv)):
+                    if type(m.conv[idx]) == nn.Conv2d:
+                        torch.quantization.fuse_modules(m.conv, [str(idx), str(idx + 1)], inplace=True)
+
 def QMobilenetv2(destination_path="/content/data/"):
     url="https://download.pytorch.org/models/mobilenet_v2-b0353104.pth"
     r = requests.get(url)
