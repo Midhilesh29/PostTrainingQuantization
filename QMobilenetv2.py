@@ -81,7 +81,7 @@ class QuantMobileNetV2(nn.Module):
             round_nearest (int): Round the number of channels in each layer to be a multiple of this number
             Set to 1 to turn off rounding
         """
-        super(MobileNetV2, self).__init__()
+        super(QuantMobileNetV2, self).__init__()
         block = InvertedResidual
         input_channel = 32
         last_channel = 1280
