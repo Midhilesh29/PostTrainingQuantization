@@ -6,7 +6,6 @@ import os
 import torchvision
 import requests
 
-
 def _make_divisible(v, divisor, min_value=None):
     """
     This function is taken from the original tf repo.
@@ -69,7 +68,7 @@ class InvertedResidual(nn.Module):
             return self.conv(x)
 
 
-class QuantMobileNetV2(nn.Module):
+class MobileNetV2(nn.Module):
     def __init__(self, num_classes=1000, width_mult=1.0, inverted_residual_setting=None, round_nearest=8):
         """
         MobileNet V2 main class
@@ -81,7 +80,7 @@ class QuantMobileNetV2(nn.Module):
             round_nearest (int): Round the number of channels in each layer to be a multiple of this number
             Set to 1 to turn off rounding
         """
-        super(QuantMobileNetV2, self).__init__()
+        super(MobileNetV2, self).__init__()
         block = InvertedResidual
         input_channel = 32
         last_channel = 1280
@@ -149,6 +148,8 @@ class QuantMobileNetV2(nn.Module):
         x = self.dequant(x)
         return x
 
+    # Fuse Conv+BN and Conv+BN+Relu modules prior to quantization
+    # This operation does not change the numerics
     def fuse_model(self):
         for m in self.modules():
             if type(m) == ConvBNReLU:
@@ -168,7 +169,7 @@ def QMobilenetv2(destination_path="/content/data/"):
     with open(model_file, 'wb') as f:
         f.write(r.content)
 
-    model = QuantMobileNetV2()
+    model = MobileNetV2()
     state_dict = torch.load(model_file)
     model.load_state_dict(state_dict)
     
