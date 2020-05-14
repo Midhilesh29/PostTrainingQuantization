@@ -20,6 +20,8 @@ def compare_model(model_name,num_eval_batches=10,criterion = nn.CrossEntropyLoss
         model=QAlexnet()
     elif(model_name=="MobileNetv2"):
         model=QMobilenetv2()
+        model.fuse_model()
+        
     print("Checking size of "+f"{model_name}")
     print("Size (MB) of "+f"{model_name} is:",print_size_of_model(model))
     print("Evaluvating "+ f"{model_name} on the imagenet data\n")
