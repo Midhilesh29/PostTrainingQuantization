@@ -14,8 +14,7 @@ def per_channel_quantization(model,data_loader,num_calibration_batches = 10,crit
 
     evaluate(model, criterion, data_loader, neval_batches=num_calibration_batches)
     torch.quantization.convert(model, inplace=True)
-    print('Post Training Quantization: Convert done')
+    print('Post Training Quantization: Convert done\n')
 
-    print("Model size after per-channel quantization:",print_size_of_model(model))
 
     return model
