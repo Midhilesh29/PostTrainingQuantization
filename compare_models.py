@@ -1,6 +1,7 @@
 import torch.nn as nn
 from QAlexnet import QAlexnet
 from QMobilenetv2 import QMobilenetv2
+from QResnet import resnet18,resnet50
 from per_channel import per_channel_quantization
 from per_tensor import per_tensor_quantization
 from utils import evaluate,print_size_of_model
@@ -21,6 +22,14 @@ def compare_model(model_name,num_eval_batches=10,criterion = nn.CrossEntropyLoss
         model.eval()
     elif(model_name=="MobileNetv2"):
         model=QMobilenetv2()
+        model.eval()
+        model.fuse_model()
+    elif(model_name=="resnet18"):
+        model = resnet18(pretrained=True)
+        model.eval()
+        model.fuse_model()
+    elif(model_name=="resnet50"):
+        model = resnet50(pretrained=True)
         model.eval()
         model.fuse_model()
 
