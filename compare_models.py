@@ -47,7 +47,7 @@ def compare_model(deep_learning_models,num_eval_batches=10,criterion = nn.CrossE
 
         print("Checking size of "+f"{model_name}")
         size_of_model = print_size_of_model(model)
-        print("Size (MB) of "+f"{model_name} is:",)
+        print("Size (MB) of "+f"{model_name} is:",size_of_model)
         print("Evaluvating "+ f"{model_name} on the imagenet data\n")
         _,model_top5 = evaluate(model, criterion, data_loader, neval_batches=num_eval_batches)
 
