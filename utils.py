@@ -60,7 +60,7 @@ def evaluate(model, criterion, data_loader, neval_batches):
             if cnt >= neval_batches:
                  return top1, top5
 
-    return top1, top5os.path.getsize("temp.p")/1e6
+    return top1, top5
 
 def print_size_of_model(model):
     torch.save(model.state_dict(), "temp.p")
